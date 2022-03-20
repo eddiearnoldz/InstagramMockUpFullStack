@@ -8,14 +8,13 @@ import SignIn from './components/screens/SignIn'
 import SignUp from './components/screens/SignUp'
 import CreatePost from './components/screens/CreatePost'
 import {initialState, reducer} from './reducers/userReducer'
-
 export const UserContext = createContext()
+
 const Routing = () => {
   const navigate = useNavigate()
   const {state, dispatch} = useContext(UserContext)
   useEffect(()=>{
     const user = JSON.parse(localStorage.getItem("user"))
-
     if(user){
       dispatch({type:"USER", payload:user})
       navigate('/')
