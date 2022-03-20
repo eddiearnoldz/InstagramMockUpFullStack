@@ -26,6 +26,8 @@ const SignIn = () => {
        if(data.error){
         M.toast({html: data.error, classes: '#d32f2f red darken-2'})
        } else {
+         localStorage.setItem("jwt",data.token)
+         localStorage.setItem("user",JSON.stringify(data.user))
          M.toast({html:"signed in successfuly", classes: '#536dfe indigo accent-2'})
          navigation('/')
        } 
