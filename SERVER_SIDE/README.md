@@ -1,0 +1,9 @@
+# Instagram MERN fullstack mock-up
+
+This is a days attempt to replicate instagram using a MERN stack. This includes Mongodb,Node.js and Express in  the back ned and React for the client side front end. Most of it followed a tutorial on YOUTUBE as well as implemeneting the fundmanetals we learned over the last two weeks of the javascript section of the bootcamp.
+
+# Installation
+Please clone this repo from https://github.com/eddiearnoldz/Instagram-MERN-mockup and open it in a code editor
+You must run ```npm install``` to require dependencies
+run the command ```npm start``` to fire up the local server at port 5001
+
