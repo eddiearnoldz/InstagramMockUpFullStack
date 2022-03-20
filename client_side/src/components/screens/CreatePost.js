@@ -90,4 +90,4 @@ return(
 )
 } 
 
-export default CreatePost
+export default CreatePost;
