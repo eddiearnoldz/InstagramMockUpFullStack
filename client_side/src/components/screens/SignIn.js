@@ -24,7 +24,6 @@ const SignIn = () => {
         })
       }).then(res=>res.json())
       .then(data=>{
-        console.log(data)
        if(data.error){
         M.toast({html: data.error, classes: '#d32f2f red darken-2'})
        } else {
@@ -49,7 +48,7 @@ const SignIn = () => {
        value={email}
        onChange={(e)=>setEmail(e.target.value)}/>
        <input
-        type="text"
+        type="password"
         placeholder="password"
         value={password}
         onChange={(e)=>setPassword(e.target.value)}/>

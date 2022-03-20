@@ -16,6 +16,10 @@ const postSchema = new mongoose.Schema({
   postedBy:{
     type:ObjectId,
     ref:"User"
-  }
+  },
+  like:[{
+    type:ObjectId,
+    ref:"User"
+  }] 
 })
-mongoose.model("Post", postSchema)
+mongoose.model("Post", postSchema) 
