@@ -1,8 +1,10 @@
-import React,{useState} from 'react'
+import React,{useState, useContext,} from 'react'
 import {Link, useNavigate} from 'react-router-dom'
+import { UserContext } from '../../App'
 import M from 'materialize-css'
 
 const SignIn = () => {
+  const {state, dispatch} = useContext(UserContext)
   const navigation = useNavigate()
   const [password,setPassword] = useState("")
   const [email,setEmail] = useState("")
@@ -28,6 +30,7 @@ const SignIn = () => {
        } else {
          localStorage.setItem("jwt",data.token)
          localStorage.setItem("user",JSON.stringify(data.user))
+         dispatch({type:"USER", payload:data.user})
          M.toast({html:"signed in successfuly", classes: '#536dfe indigo accent-2'})
          navigation('/')
        } 
