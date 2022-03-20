@@ -5,5 +5,10 @@ This is a days attempt to replicate instagram using a MERN stack. This includes 
 # Installation
 Please clone this repo from https://github.com/eddiearnoldz/Instagram-MERN-mockup and open it in a code editor
 You must run ```npm install``` to require dependencies
+
+For server side (node.js and express)
 run the command ```npm start``` to fire up the local server at port 5001
+
+For client side (react)
+run the same command ```npm start```
 
