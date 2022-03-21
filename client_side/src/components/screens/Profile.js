@@ -13,7 +13,7 @@ const Profile = () => {
     .then(result=>{
       setPics(result.myposts)
     })
-  })
+  }, [])
   return (
   <div style={{maxWidth: '550px', margin:"0px auto"}}>
     <div style={{
@@ -31,7 +31,7 @@ const Profile = () => {
          {state?state.name:"loading"}
         </h4>
         <div style={{display: 'flex', justifyContent: 'space-between', width: '108%'}}>
-        <h6>40 posts</h6>
+        <h6>{mypics.length} posts</h6>
         <h6>40 followers</h6>
         <h6>40 following</h6>
         </div>
