@@ -121,7 +121,8 @@ const Home = () => {
                 style={{float:"right"}}
                 onClick={()=>{deletePost(item._id)}}
                 >delete</i>
-                }</h5>
+                } <img src={item.postedBy.pic} style={{width:"30px", borderRadius:"15px"}}/></h5>
+               
                 <div className="card-image">
                   <img src={item.photo}/>
                 </div>

@@ -4,6 +4,9 @@ import {UserContext} from '../../App'
 const Profile = () => {
   const [mypics, setPics] = useState([])
   const {state, dispatch} = useContext(UserContext)
+  const [image, setImage] = useState("")
+  const [url, setUrl] = useState(undefined)
+
   useEffect(()=>{
     fetch('/myposts',{
       headers:{
@@ -14,17 +17,39 @@ const Profile = () => {
       setPics(result.myposts)
     })
   }, [])
+  const updatePhoto = () => {
+    const data = new FormData()
+    data.append("file", image)
+    data.append("upload_preset", "instagram-mockup")
+    data.append("cloud_name", "eddiecloudarnold")
+
+    fetch("https://api.cloudinary.com/v1_1/eddiecloudarnold/image/upload", {
+      method: "post",
+      body: data 
+    })
+    .then(res=>res.json())
+    .then(data=>{
+      setUrl(data.url)
+    })
+    .catch(err=>{
+      console.log(err)
+    })
+  }
   return (
   <div style={{maxWidth: '550px', margin:"0px auto"}}>
-    <div style={{
-      display: 'flex',
-      justifyContent: 'space-around',
+    <div  style={{
       margin: '18px 0px',
       borderBottom:"1px solid grey"
     }}>
+
+ 
+    <div style={{
+      display: 'flex',
+      justifyContent: 'space-around'
+    }}>
       <div>
         <img style={{width: "160px", height:"160px", borderRadius:"80px"}}
-        src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fHBlcnNvbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=400&q=60"/>
+        src={state? state.pic : "loading"}/>
       </div>
       <div>
         <h4>{state?state.name:"loading"}</h4>
@@ -36,6 +61,16 @@ const Profile = () => {
         </div>
       </div>
     </div>
+    <div className="file-field input-field" style={{margin:"10px"}}>
+      <div className="btn #1976d2 blue darken-2">
+        <span>Update Pic</span>
+        <input type="file" onChange={(e)=>setImage(e.target.files[0])}/>
+      </div>
+      <div className="file-path-wrapper">
+        <input className="file-path validate" type="text"/>
+      </div>
+      </div>
+  </div>
     <div className="gallery">
       {
         mypics.map(photo=>{
