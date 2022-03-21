@@ -7,8 +7,10 @@ Please clone this repo from https://github.com/eddiearnoldz/Instagram-MERN-mocku
 You must run ```npm install``` to require dependencies
 
 For server side (node.js and express)
+```cd SERVER_SIDE```
 run the command ```npm start``` to fire up the local server at port 5001
 
 For client side (react)
+```cd client_side```
 run the same command ```npm start```
 
