@@ -5,7 +5,6 @@ const Profile = () => {
   const [mypics, setPics] = useState([])
   const {state, dispatch} = useContext(UserContext)
   const [image, setImage] = useState("")
-  const [url, setUrl] = useState(undefined)
 
   useEffect(()=>{
     fetch('/myposts',{
@@ -17,23 +16,42 @@ const Profile = () => {
       setPics(result.myposts)
     })
   }, [])
-  const updatePhoto = () => {
-    const data = new FormData()
-    data.append("file", image)
-    data.append("upload_preset", "instagram-mockup")
-    data.append("cloud_name", "eddiecloudarnold")
-
-    fetch("https://api.cloudinary.com/v1_1/eddiecloudarnold/image/upload", {
-      method: "post",
-      body: data 
-    })
-    .then(res=>res.json())
-    .then(data=>{
-      setUrl(data.url)
-    })
-    .catch(err=>{
-      console.log(err)
-    })
+  useEffect(()=>{
+    if(image){
+      const data = new FormData()
+      data.append("file", image)
+      data.append("upload_preset", "instagram-mockup")
+      data.append("cloud_name", "eddiecloudarnold")
+  
+      fetch("https://api.cloudinary.com/v1_1/eddiecloudarnold/image/upload", {
+        method: "post",
+        body: data 
+      })
+      .then(res=>res.json())
+      .then(data=>{
+        fetch('/updatepic', {
+          method:'put',
+          headers:{
+            "Content-Type": "application/json",
+            "Authorization": "Bearer "+localStorage.getItem("jwt")
+          },
+          body:JSON.stringify({
+            pic:data.url
+          })
+        }).then(res=>res.json())
+        .then(result=>{
+          console.log(result)
+          localStorage.setItem("user", JSON.stringify({...state,pic:result.pic}))
+             dispatch({type:"UPDATEPIC", payload:result.pic})
+        })
+      })
+      .catch(err=>{
+        console.log(err)
+      })
+    }
+  }, [image])
+  const updatePhoto = (file) => {
+    setImage(file)
   }
   return (
   <div style={{maxWidth: '550px', margin:"0px auto"}}>
@@ -64,7 +82,7 @@ const Profile = () => {
     <div className="file-field input-field" style={{margin:"10px"}}>
       <div className="btn #1976d2 blue darken-2">
         <span>Update Pic</span>
-        <input type="file" onChange={(e)=>setImage(e.target.files[0])}/>
+        <input type="file" onChange={(e)=>updatePhoto(e.target.files[0])}/>
       </div>
       <div className="file-path-wrapper">
         <input className="file-path validate" type="text"/>
