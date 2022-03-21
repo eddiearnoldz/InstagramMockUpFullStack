@@ -27,9 +27,8 @@ const Profile = () => {
         src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fHBlcnNvbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=400&q=60"/>
       </div>
       <div>
-        <h4>
-         {state?state.name:"loading"}
-        </h4>
+        <h4>{state?state.name:"loading"}</h4>
+        <h6>{state?state.email:"loading"}</h6>
         <div style={{display: 'flex', justifyContent: 'space-between', width: '108%'}}>
         <h6>{mypics.length} posts</h6>
         <h6>{state?state.followers.length:"0"}followers</h6>
