@@ -2,10 +2,10 @@
   "name": "instagram_mern_full_stack",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js  --ignore client"
+    "start": "node app.js",
+    "heroku-postbuild":"NPM CONFIG_PRODUCTION=false npm install --prefix client_side && npm run build --prefix client_side"
   },
   "author": "",
   "license": "ISC",

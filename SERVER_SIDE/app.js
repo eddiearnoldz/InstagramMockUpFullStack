@@ -1,8 +1,8 @@
 const express = require("express");
 const app = express();
-const PORT = 5001
+const PORT = process.env.PORT || 5001
 const mongoose = require('mongoose')
-const { MONGOURI } = require('./keys')
+const { MONGOURI } = require('./config/keys')
 
 
 
@@ -24,6 +24,15 @@ app.use(express.json());
 app.use(require('./routes/auth'))
 app.use(require('./routes/post'))
 app.use(require('./routes/user'))
+
+if(process.env.NODE_END == "production"){
+  app.use(express.static('client_side/build'))
+  const path = require('path')
+  app.get("*", (req,res)=>{
+    res.sendFile(path.resolve(__dirname,'client','build','index.html'))
+  })
+}
+
 
 app.listen(PORT, ()=> {
   console.log("server is up and running on port ", PORT)
